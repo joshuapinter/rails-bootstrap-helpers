@@ -108,7 +108,7 @@ module RailsBootstrapHelpers::BootstrapHelper
     klass << 'label'
     klass << options[:label_style].to_s
     
-    content_tag :div, text, klass.compact.join(' ')
+    content_tag :div, text, class: klass.compact.join(' ')
   end
   
 end
