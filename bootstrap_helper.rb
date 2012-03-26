@@ -108,7 +108,7 @@ module RailsBootstrapHelpers::BootstrapHelper
     klass << 'label'
     
     label_style = options[:label_style]
-    label_style.insert( 0, 'label-' ) unless label_style.starts_with( 'label-' )
+    label_style.insert( 0, 'label-' ) unless label_style.starts_with?( 'label-' )
     klass << label_style
     
     content_tag :div, text, class: klass.compact.join(' ')
