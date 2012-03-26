@@ -92,4 +92,23 @@ module RailsBootstrapHelpers::BootstrapHelper
     end
   end
   
+  # Generates a label a la Bootstrap.
+  #
+  # @param [String] text Label text.
+  # @param [Hash] options Class options and 
+  #
+  # @option options [String, Symbol] label_style (nil) Label style from Bootstrap. Possible choices
+  #   are: `:success`, `:warning`, `:important`, `:info`, `inverse`
+  #
+  # @todo Allow any html_options for options.
+  # @todo Tests.
+  #
+  def label text, options = {}
+    klass = options[:class].split
+    klass << 'label'
+    klass << options[:label_style].to_s
+    
+    content_tag :div, text, klass.compact.join(' ')
+  end
+  
 end
