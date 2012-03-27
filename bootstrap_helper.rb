@@ -95,7 +95,7 @@ module RailsBootstrapHelpers::BootstrapHelper
   # Generates a label a la Bootstrap.
   #
   # @param [String] text Label text.
-  # @param [Hash] options Class options and 
+  # @param [Hash] options Class options and label style.
   #
   # @option options [String, Symbol] label_style (nil) Label style from Bootstrap. Possible choices
   #   are: `:success`, `:warning`, `:important`, `:info`, `inverse`
@@ -104,14 +104,40 @@ module RailsBootstrapHelpers::BootstrapHelper
   # @todo Tests.
   #
   def inline_label text, options = {}
-    klass = options[:class].split
-    klass << 'label'
+    klass = ['label']
+    klass << options[:class].try(:split)
+
     
-    label_style = options[:label_style]
-    label_style.insert( 0, 'label-' ) unless label_style.starts_with?( 'label-' )
+    label_style = options[:label_style].to_s
+    label_style.insert(0, 'label-') unless label_style.blank? or label_style.starts_with?('label-')
     klass << label_style
     
-    content_tag :div, text, class: klass.compact.join(' ')
+    content_tag :span, text, class: klass.compact.join(' ')
+  end
+  
+  # Generates a badge a la Bootstrap.
+  #
+  # @param [String] text Badge text.
+  # @param [Hash] options Class options and badge style.
+  #
+  # @option options [String, Symbol] badge_style (nil) Badge style from Bootstrap. Possible choices
+  #   are: `:success`, `:warning`, `:important`, `:info`, `inverse`
+  #
+  # @todo Allow any html_options for options.
+  # @todo Tests.
+  # @todo DRY this and #inline_label up.
+  #
+  # @see #inline_label
+  #
+  def badge text, options = {}
+    klass = ['badge']
+    klass << options[:class].try(:split)
+    
+    badge_style = options[:badge_style].to_s
+    badge_style.insert(0, 'badge-') unless badge_style.blank? or badge_style.starts_with?('badge-')
+    klass << badge_style
+    
+    content_tag :span, text, class: klass.compact.join(' ')
   end
   
 end
