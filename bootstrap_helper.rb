@@ -103,7 +103,7 @@ module RailsBootstrapHelpers::BootstrapHelper
   # @todo Allow any html_options for options.
   # @todo Tests.
   #
-  def label text, options = {}
+  def inline_label text, options = {}
     klass = options[:class].split
     klass << 'label'
     
