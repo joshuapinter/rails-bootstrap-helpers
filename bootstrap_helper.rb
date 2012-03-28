@@ -20,7 +20,9 @@ module RailsBootstrapHelpers::BootstrapHelper
   #   with 'icon-' if not done already.
   # @param [Hash] options 
   #
-  # @option options [Boolean] white (false) Set to false if you want to use the black icon.
+  # @option options [Boolean] white (false) Set to true if you want a white icon.
+  # @option options [String] class ('') Set any classes you want for the icon here.
+  #   a bit nicer.
   #
   # @return [HTML]
   #
@@ -33,6 +35,7 @@ module RailsBootstrapHelpers::BootstrapHelper
   
     klass = [name]
     klass << 'icon-white' if options[:white]
+    klass << options[:class]
   
     content_tag :i, nil, class: klass.join( ' ' )
   end
