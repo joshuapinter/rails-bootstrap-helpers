@@ -18,7 +18,7 @@ module RailsBootstrapHelpers::BootstrapHelper
   #
   # @param [String] name Icon name from Bootstrap's Glyphicons. Automatically prefixes the name
   #   with 'icon-' if not done already.
-  # @param [Hash] options 
+  # @param [Hash] options
   #
   # @option options [Boolean] white (false) Set to true if you want a white icon.
   # @option options [String] class ('') Set any classes you want for the icon here.
@@ -43,18 +43,24 @@ module RailsBootstrapHelpers::BootstrapHelper
   # Creates a tooltip alla Twitter Bootstrap.
   #
   # @param [String] anchor Anchor that people will hover over.
-  # @param [String] tip Tooltip text to show when people hover over the `text`.
-  # @param [String] link Optionally pass in a link for when people click on the anchor text. We use
+  # @param [Hash] options Specific options as well as any additional HTML options link_to accepts.
+  #
+  # @option [String] tip ('') Tip to be displayed on hover.  
+  # @option [String] link Optionally pass in a link for when people click on the anchor text. We use
   #   this in Emission Central where we tell them that a feature is PRO feature and then clicking
   #   on the link creates an email to our support account.
+  # @option []
   #
   # @return [HTML] link_to formatted correctly.
   #
   # @example Tooltip for an image.
-  #   tooltip image_tag( 'lock_icon.png', size: '10x14', class: 'lock' ), t('folder.private')
+  #   tooltip 'Imma tooltip!', tip: t('folder.private')
   #
-  def tooltip anchor, tip, link = '#'
-    link_to anchor, link, "data-original-title" => tip, rel: 'tooltip'
+  def tooltip anchor, options = {}
+    options.reverse_merge!( tip: '', link: '#' )  # Set defaults.
+    options.merge!( "data-original-title" => options[:tip], rel: 'tooltip' ) # Set requirements.
+    
+    link_to anchor, options.delete(:link), options
   end
 
   # Creates a tooltip alla Twitter Bootstrap but instead of creating a link, it uses an image.
@@ -70,7 +76,7 @@ module RailsBootstrapHelpers::BootstrapHelper
   def image_tag_with_tooltip source, options = {}
     options.reverse_merge!( tip: '' )
     options.merge_nicely!( rel: 'tooltip', "data-original-title" => options.delete(:tip) )
-  
+    
     image_tag source, options
   end
 
