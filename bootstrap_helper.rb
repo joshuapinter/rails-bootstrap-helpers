@@ -56,9 +56,13 @@ module RailsBootstrapHelpers::BootstrapHelper
   # @example Tooltip for an image.
   #   tooltip 'Imma tooltip!', tip: t('folder.private')
   #
+  # @see #image_tag_with_tooltip Using an image as a tooltip.  
+  #
+  # @todo `tip` shouldn't be optional. It doesn't trigger if that's not set.
+  #
   def tooltip anchor, options = {}
-    options.reverse_merge!( tip: '', link: '#' )  # Set defaults.
-    options.merge!( "data-original-title" => options[:tip], rel: 'tooltip' ) # Set requirements.
+    options.reverse_merge!( tip: '', link: '#' )
+    options.merge!( "data-original-title" => options.delete(:tip), rel: 'tooltip' )
     
     link_to anchor, options.delete(:link), options
   end
@@ -70,8 +74,10 @@ module RailsBootstrapHelpers::BootstrapHelper
   #
   # @option [String] tip ('') Tip to be displayed on hover.
   #
-  # @see #tooltip
-  # @see #image_tag
+  # @see #tooltip Simple tooltip with just text.
+  # @see #image_tag 
+  #
+  # @todo `tip` shouldn't be optional. It doesn't trigger if that's not set.
   #
   def image_tag_with_tooltip source, options = {}
     options.reverse_merge!( tip: '' )
