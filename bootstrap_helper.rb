@@ -115,6 +115,9 @@ module RailsBootstrapHelpers::BootstrapHelper
   # @option options [String, Symbol] label_style (nil) Label style from Bootstrap. Possible choices
   #   are: `:success`, `:warning`, `:important`, `:info`, `inverse`
   #
+  # @example White label.
+  #   inline_label( 'Next Shutdown', label_style: 'white' )
+  #
   # @todo Allow any html_options for options.
   # @todo Tests.
   #
